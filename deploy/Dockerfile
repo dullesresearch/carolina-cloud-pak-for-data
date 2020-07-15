@@ -21,6 +21,7 @@ RUN mkdir -p /opt/carolina_files /home/wsuser/.local $CAROLINA_HOME \
 USER wsbuild:wsbuild
 
 COPY carolina_files /opt/carolina_files/
+COPY Dockerfile /opt/carolina_files/
 
 RUN id && ls -la /opt/carolina_files/* \
        && cd /opt/carolina_files \
@@ -41,8 +42,7 @@ RUN id && ls -la /opt/carolina_files/* \
 
 USER root:root
 
-RUN cp -r /home/wsbuild/.local/share/jupyter/kernels/carolina /opt/ibm/run/kernels \
-       && sed -i -e "s/ipykernel/carolina_kernel/g" /opt/ibm/run/bin/python-kernel.sh
+RUN cp -r /home/wsbuild/.local/share/jupyter/kernels/carolina /opt/ibm/run/kernels 
 
 USER wsbuild:wsbuild
 
